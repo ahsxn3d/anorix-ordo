@@ -1,7 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const CoreScene = dynamic(() => import("./CoreScene"), { ssr: false });
@@ -23,13 +22,14 @@ export default function Core() {
     const el = root.current!;
     const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) setMount(true); setRunning(e.isIntersecting); }, { rootMargin: "60% 0px" });
     io.observe(el);
+    const bar = el.querySelector<HTMLElement>(".core-bar");
     const st = ScrollTrigger.create({
       trigger: el, start: "top top", end: "bottom bottom", scrub: true,
       onUpdate: (s) => {
         progress.current = s.progress;
         const a = s.progress < 0.36 ? 0 : s.progress < 0.7 ? 1 : 2;
         setActive((p) => (p === a ? p : a));
-        gsap.set(".core-bar", { scaleX: s.progress });
+        if (bar) bar.style.transform = `scaleX(${s.progress})`;
       },
     });
     return () => { io.disconnect(); st.kill(); };
@@ -48,7 +48,7 @@ export default function Core() {
           <div className="grid grid-cols-4 items-end gap-4 md:grid-cols-12 md:gap-6">
             <div className="relative col-span-4 min-h-[230px] md:col-span-5 md:min-h-[260px]">
               {chapters.map(([n, k, h, p], i) => (
-                <div key={n} className={`absolute inset-x-0 bottom-0 transition-all duration-[900ms] ease-[cubic-bezier(.16,1,.3,1)] ${active === i ? "translate-y-0 opacity-100 blur-0" : active > i ? "-translate-y-8 opacity-0 blur-md" : "translate-y-8 opacity-0 blur-md"}`}>
+                <div key={n} className={`absolute inset-x-0 bottom-0 transition-[opacity,transform] duration-[900ms] will-change-transform ease-[cubic-bezier(.16,1,.3,1)] ${active === i ? "translate-y-0 opacity-100" : active > i ? "-translate-y-8 opacity-0" : "translate-y-8 opacity-0"}`}>
                   <p className="mono mb-4 text-mint">{n} / {k}</p>
                   <h2 className="display text-[clamp(44px,6vw,96px)] text-paper">{h}</h2>
                   <p className="mt-5 max-w-[40ch] text-[15px] leading-relaxed text-paper/60 md:text-[16px]">{p}</p>

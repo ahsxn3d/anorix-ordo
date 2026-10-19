@@ -46,7 +46,7 @@ export default function AgentConsole() {
   const R = runs[run];
   const done = step >= 5;
   return (
-    <div ref={box} className="relative w-full overflow-hidden rounded-[22px] border border-white/10 bg-graphite/90 shadow-[0_40px_120px_-40px_rgba(124,255,196,0.18)] backdrop-blur">
+    <div ref={box} className="relative w-full overflow-hidden rounded-[22px] border border-white/10 bg-graphite shadow-[0_40px_120px_-40px_rgba(124,255,196,0.18)]">
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-3.5">
         <div className="flex items-center gap-2.5">
           <span className="h-2 w-2 rounded-full bg-mint pulse-dot" />

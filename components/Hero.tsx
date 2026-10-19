@@ -14,7 +14,6 @@ export default function Hero() {
         scale: 0.92, yPercent: 8, opacity: 0.35, ease: "none",
         scrollTrigger: { trigger: root.current, start: "top top", end: "bottom top", scrub: true },
       });
-      gsap.to(".hero-orb", { rotate: 360, duration: 60, repeat: -1, ease: "none" });
       gsap.fromTo(".hero-console", { y: 60, autoAlpha: 0, rotateX: 18 }, { y: 0, autoAlpha: 1, rotateX: 0, duration: 1.6, delay: 0.5, ease: "expo.out" });
     }, root);
     return () => ctx.revert();
@@ -22,7 +21,7 @@ export default function Hero() {
   return (
     <section id="top" ref={root} className="relative overflow-clip bg-ink pb-[clamp(80px,12vw,180px)] pt-[clamp(112px,11vw,160px)]">
       <div ref={inner} className="origin-top will-change-transform">
-        <div aria-hidden className="hero-orb pointer-events-none absolute -right-[18vw] top-[-12vw] h-[64vw] w-[64vw] rounded-full opacity-60" style={{ background: "conic-gradient(from 0deg, transparent 0 60%, rgba(124,255,196,.16) 75%, transparent 90%)", maskImage: "radial-gradient(circle, transparent 54%, #000 55%, #000 56%, transparent 70%)", WebkitMaskImage: "radial-gradient(circle, transparent 54%, #000 55%, #000 56%, transparent 70%)" }} />
+        <div aria-hidden className="hero-orb spin-slow pointer-events-none absolute will-change-transform -right-[18vw] top-[-12vw] h-[64vw] w-[64vw] rounded-full opacity-60" style={{ background: "conic-gradient(from 0deg, transparent 0 60%, rgba(124,255,196,.16) 75%, transparent 90%)", maskImage: "radial-gradient(circle, transparent 54%, #000 55%, #000 56%, transparent 70%)", WebkitMaskImage: "radial-gradient(circle, transparent 54%, #000 55%, #000 56%, transparent 70%)" }} />
         <div className="wrap relative grid grid-cols-4 gap-x-4 md:grid-cols-12 md:gap-x-6">
           <div className="col-span-4 md:col-span-7">
             <p className="mono mb-6 flex items-center gap-2 text-paper/55" data-fade data-immediate>

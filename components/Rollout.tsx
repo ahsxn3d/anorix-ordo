@@ -38,9 +38,9 @@ export default function Rollout() {
     mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
       const t = track.current!;
       const dist = () => t.scrollWidth - window.innerWidth;
-      const tween = gsap.to(t, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: root.current, start: "top top", end: () => `+=${dist()}`, scrub: 0.8, pin: true, invalidateOnRefresh: true, anticipatePin: 1 } });
+      const tween = gsap.to(t, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: root.current, start: "top top", end: () => `+=${dist()}`, scrub: true, pin: true, invalidateOnRefresh: true, anticipatePin: 1, fastScrollEnd: true } });
       t.querySelectorAll<HTMLElement>(".phase").forEach((card) => {
-        gsap.fromTo(card, { rotateY: -14, z: -120, opacity: 0.35 }, { rotateY: 0, z: 0, opacity: 1, ease: "power2.out", scrollTrigger: { trigger: card, containerAnimation: tween, start: "left 95%", end: "left 45%", scrub: true } });
+        gsap.fromTo(card, { rotateY: -12, opacity: 0.4 }, { rotateY: 0, opacity: 1, ease: "power2.out", scrollTrigger: { trigger: card, containerAnimation: tween, start: "left 95%", end: "left 45%", scrub: true } });
         card.querySelectorAll<SVGGeometryElement>(".draw [pathLength]").forEach((p) => gsap.fromTo(p, { strokeDasharray: "1 1", strokeDashoffset: 1 }, { strokeDashoffset: 0, ease: "none", scrollTrigger: { trigger: card, containerAnimation: tween, start: "left 85%", end: "left 35%", scrub: true } }));
         const bars = card.querySelectorAll(".bar");
         if (bars.length) gsap.fromTo(bars, { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: 1, stagger: 0.06, ease: "none", scrollTrigger: { trigger: card, containerAnimation: tween, start: "left 85%", end: "left 35%", scrub: true } });
@@ -65,7 +65,7 @@ export default function Rollout() {
             <p className="mt-8 max-w-[38ch] text-[16px] leading-relaxed text-paper/60" data-fade>No big-bang migration. Ordo earns autonomy one workflow at a time, on your data, with your rules.</p>
           </div>
           {phases.map((ph, i) => (
-            <article key={ph.n} className="phase flex min-h-[520px] flex-col justify-between rounded-[28px] border border-white/10 bg-graphite p-7 [transform-style:preserve-3d] md:p-9 lg:h-[72vh] lg:w-[36vw]">
+            <article key={ph.n} className="phase flex min-h-[520px] flex-col justify-between rounded-[28px] border border-white/10 bg-graphite p-7 will-change-transform md:p-9 lg:h-[72vh] lg:w-[36vw]">
               <div className="flex items-center justify-between">
                 <span className="mono text-mint">{ph.n} / {ph.k}</span>
                 <span className="mono text-paper/60">{ph.w}</span>

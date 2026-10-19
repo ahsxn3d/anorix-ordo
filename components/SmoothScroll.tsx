@@ -15,9 +15,17 @@ export default function SmoothScroll() {
     let lenis: Lenis | undefined;
     const tick = (t: number) => lenis?.raf(t * 1000);
     if (!reduce) {
-      lenis = new Lenis({ lerp: 0.11, wheelMultiplier: 1, smoothWheel: true });
+      lenis = new Lenis({ lerp: 0.12, wheelMultiplier: 1, smoothWheel: true, autoRaf: false });
       window.__lenis = lenis;
       lenis.on("scroll", ScrollTrigger.update);
+      let idle = 0;
+      const root = document.documentElement;
+      lenis.on("scroll", (l: Lenis) => {
+        if (Math.abs(l.velocity) < 1.5) return;
+        if (!root.classList.contains("is-scrolling")) root.classList.add("is-scrolling");
+        clearTimeout(idle);
+        idle = window.setTimeout(() => root.classList.remove("is-scrolling"), 140);
+      });
       gsap.ticker.add(tick);
       gsap.ticker.lagSmoothing(0);
     }
@@ -49,7 +57,7 @@ export default function SmoothScroll() {
           gsap.set(el, { autoAlpha: 1 });
           const immediate = el.dataset.immediate !== undefined;
           gsap.from(s.lines, {
-            yPercent: 112, rotate: 2.5, filter: "blur(10px)", duration: 1.25, ease: "expo.out", stagger: 0.09,
+            yPercent: 112, rotate: 2.5, duration: 1.2, ease: "expo.out", stagger: 0.09,
             delay: immediate ? Number(el.dataset.delay ?? 0.15) : 0,
             scrollTrigger: immediate ? undefined : { trigger: el, start: "top 86%", once: true },
           });
@@ -70,13 +78,13 @@ export default function SmoothScroll() {
           splits.push(s);
           gsap.set(el, { autoAlpha: 1 });
           if (el.dataset.scrub !== undefined) {
-            gsap.fromTo(s.words, { opacity: 0.22, filter: "blur(6px)" }, {
-              opacity: 1, filter: "blur(0px)", stagger: 0.08, ease: "none",
-              scrollTrigger: { trigger: el, start: "top 80%", end: "bottom 45%", scrub: 0.6 },
+            gsap.fromTo(s.words, { opacity: 0.22 }, {
+              opacity: 1, stagger: 0.08, ease: "none",
+              scrollTrigger: { trigger: el, start: "top 80%", end: "bottom 45%", scrub: true },
             });
           } else {
             gsap.from(s.words, {
-              opacity: 0, filter: "blur(12px)", y: 14, duration: 1, ease: "power3.out", stagger: 0.025,
+              opacity: 0, y: 14, duration: 1, ease: "power3.out", stagger: 0.025,
               scrollTrigger: { trigger: el, start: "top 88%", once: true },
             });
           }
@@ -94,7 +102,7 @@ export default function SmoothScroll() {
             clipPath: "inset(0% 0% 0% 0% round 20px)", ease: "expo.out", duration: 1.6,
             scrollTrigger: { trigger: el, start: "top 90%", once: true },
           });
-          if (img) gsap.fromTo(img, { scale: 1.25 }, { scale: 1.02, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true } });
+          if (img) gsap.fromTo(img, { scale: 1.2, yPercent: -4 }, { scale: 1.06, yPercent: 4, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true } });
         });
       });
       ScrollTrigger.refresh();

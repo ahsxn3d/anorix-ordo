@@ -25,6 +25,11 @@ export default function Agents() {
     const t = window.setInterval(() => { if (inView.current && !paused) setI((v) => (v + 1) % agents.length); }, 4200);
     return () => { clearInterval(t); io.disconnect(); };
   }, [paused]);
+  useEffect(() => {
+    const unpause = () => setPaused(false);
+    window.addEventListener("scroll", unpause, { passive: true });
+    return () => window.removeEventListener("scroll", unpause);
+  }, []);
   const A = agents[i];
   return (
     <section id="agents" ref={ref} className="sheet relative z-10 -mt-10 bg-bone text-ink">
@@ -33,7 +38,7 @@ export default function Agents() {
           <p className="mono col-span-4 text-stone md:col-span-3">03 — The agents</p>
           <h2 className="display col-span-4 text-[clamp(48px,6.6vw,108px)] md:col-span-9" data-reveal="lines">Five specialists.<br />One shared brain.</h2>
         </div>
-        <div className="mt-[clamp(56px,7vw,110px)] grid grid-cols-4 gap-8 md:grid-cols-12 md:gap-6" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+        <div className="mt-[clamp(56px,7vw,110px)] grid grid-cols-4 gap-8 md:grid-cols-12 md:gap-6" onPointerEnter={(e) => e.pointerType === "mouse" && setPaused(true)} onPointerLeave={() => setPaused(false)} onPointerCancel={() => setPaused(false)}>
           <div role="tablist" aria-label="Agents" className="col-span-4 md:col-span-6">
             {agents.map((a, k) => (
               <button key={a.k} role="tab" aria-selected={k === i} onClick={() => setI(k)}

@@ -49,6 +49,8 @@
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
 
+@keyframes spin { to { transform: rotate(360deg) } }
+.spin-slow { animation: spin 60s linear infinite; }
 @keyframes marquee { to { transform: translate3d(-50%,0,0); } }
 .marquee { animation: marquee 38s linear infinite; }
 @keyframes pulse-dot { 0%,100% { opacity: 1 } 50% { opacity: .25 } }
@@ -63,3 +65,12 @@
 
 @keyframes soft-in { from { transform: translate3d(0,18px,0); filter: blur(10px) } to { transform: none; filter: blur(0) } }
 .hero-soft { animation: soft-in 1.4s cubic-bezier(0.16,1,0.3,1) .45s both; }
+
+/* hover only on real hover devices, never while dragging or scrolling */
+@media (hover: hover) and (pointer: fine) {
+  .lib-scroller:not(.is-dragging) .group:hover .lib-zoom { transform: scale(1.05); }
+  .lib-scroller:not(.is-dragging) .group:hover .lib-arrow { transform: rotate(45deg); }
+}
+.lib-arrow { transition: transform .5s cubic-bezier(.16,1,.3,1); }
+.lib-scroller.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+html.is-scrolling .lib-scroller .group .lib-zoom, html.is-scrolling .lib-arrow { transform: none !important; }

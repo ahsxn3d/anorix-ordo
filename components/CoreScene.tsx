@@ -95,7 +95,7 @@ function Swarm({ progress, count }: { progress: MutableRefObject<number>; count:
   });
   return (
     <group ref={group}>
-      <mesh geometry={geo} material={mat} ref={mesh as never} frustumCulled={false} />
+      <mesh geometry={geo} material={mat} ref={mesh as never} frustumCulled={false} raycast={() => null} />
     </group>
   );
 }
@@ -113,7 +113,7 @@ function Core({ progress }: { progress: MutableRefObject<number> }) {
     mat.uniforms.uO.value = THREE.MathUtils.smoothstep(p, 0.7, 1.4) * 0.55;
     if (ref.current) ref.current.scale.setScalar(0.6 + THREE.MathUtils.smoothstep(p, 0.7, 2.0) * 0.5);
   });
-  return <mesh ref={ref} material={mat}><sphereGeometry args={[1.5, 48, 48]} /></mesh>;
+  return <mesh ref={ref} material={mat} raycast={() => null}><sphereGeometry args={[1.5, 40, 40]} /></mesh>;
 }
 
 function Group({ progress, count }: { progress: MutableRefObject<number>; count: number }) {
@@ -125,12 +125,12 @@ export default function CoreScene({ progress, running }: { progress: MutableRefO
   return (
     <Canvas
       frameloop={running ? "always" : "never"}
-      dpr={[1, mobile ? 1.5 : 1.75]}
+      dpr={[1, mobile ? 1.25 : 1.5]}
       gl={{ antialias: !mobile, powerPreference: "high-performance", alpha: false }}
       camera={{ position: [0, 0, mobile ? 10.5 : 8], fov: 38 }}
       onCreated={({ gl }) => gl.setClearColor("#0c0d0f")}
     >
-      <Group progress={progress} count={mobile ? 1600 : 3600} />
+      <Group progress={progress} count={mobile ? 1100 : 2400} />
       <group position={[mobile ? 0 : 1.1, mobile ? 0.9 : 0.1, 0]}><Core progress={progress} /></group>
     </Canvas>
   );

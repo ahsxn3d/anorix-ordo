@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const cases = [
   { img: "pipeline", tone: "light", tag: "Pipeline", h: "Self-healing CRM", p: "Stages, amounts and dates that fix themselves overnight." },
@@ -11,8 +11,19 @@ const cases = [
 
 export default function Library() {
   const scroller = useRef<HTMLDivElement>(null);
-  const drag = useRef({ down: false, x: 0, s: 0, moved: false });
+  const drag = useRef({ down: false, id: -1, x: 0, s: 0 });
   const by = (d: number) => scroller.current?.scrollBy({ left: d * Math.min(560, window.innerWidth * 0.8), behavior: "smooth" });
+  const end = () => {
+    const el = scroller.current; if (!el || !drag.current.down) return;
+    drag.current.down = false;
+    if (el.hasPointerCapture(drag.current.id)) el.releasePointerCapture(drag.current.id);
+    el.classList.remove("is-dragging");
+  };
+  useEffect(() => {
+    const reset = () => end();
+    window.addEventListener("blur", reset);
+    return () => window.removeEventListener("blur", reset);
+  }, []);
   return (
     <section id="library" className="sheet relative z-10 -mt-10 bg-paper text-ink">
       <div className="wrap pt-[clamp(88px,11vw,170px)]">
@@ -29,17 +40,25 @@ export default function Library() {
       </div>
       <div
         ref={scroller}
-        data-lenis-prevent-wheel
-        className="mt-12 flex cursor-grab snap-x snap-mandatory scroll-px-[clamp(16px,3.4vw,48px)] gap-4 overflow-x-auto scroll-smooth px-[clamp(16px,3.4vw,48px)] pb-[clamp(88px,11vw,170px)] [scrollbar-width:none] active:cursor-grabbing md:gap-6 [&::-webkit-scrollbar]:hidden"
-        onPointerDown={(e) => { if (e.pointerType !== "mouse") return; drag.current = { down: true, x: e.clientX, s: scroller.current!.scrollLeft, moved: false }; scroller.current!.style.scrollSnapType = "none"; scroller.current!.style.scrollBehavior = "auto"; }}
-        onPointerMove={(e) => { if (!drag.current.down) return; const dx = e.clientX - drag.current.x; if (Math.abs(dx) > 4) drag.current.moved = true; scroller.current!.scrollLeft = drag.current.s - dx; }}
-        onPointerUp={() => { drag.current.down = false; scroller.current!.style.scrollSnapType = ""; scroller.current!.style.scrollBehavior = ""; }}
-        onPointerLeave={() => { if (drag.current.down) { drag.current.down = false; scroller.current!.style.scrollSnapType = ""; scroller.current!.style.scrollBehavior = ""; } }}
+        className="lib-scroller mt-12 flex cursor-grab snap-x snap-mandatory scroll-px-[clamp(16px,3.4vw,48px)] gap-4 overflow-x-auto px-[clamp(16px,3.4vw,48px)] pb-[clamp(88px,11vw,170px)] select-none [scrollbar-width:none] md:gap-6 [&::-webkit-scrollbar]:hidden"
+        onPointerDown={(e) => {
+          if (e.pointerType !== "mouse" || e.button !== 0) return;
+          const el = scroller.current!;
+          drag.current = { down: true, id: e.pointerId, x: e.clientX, s: el.scrollLeft };
+          el.setPointerCapture(e.pointerId);
+          el.classList.add("is-dragging");
+        }}
+        onPointerMove={(e) => { if (!drag.current.down) return; scroller.current!.scrollLeft = drag.current.s - (e.clientX - drag.current.x); }}
+        onPointerUp={end}
+        onPointerCancel={end}
+        onLostPointerCapture={end}
       >
         {cases.map((c, i) => (
           <article key={c.h} className="group w-[82vw] shrink-0 snap-start sm:w-[56vw] lg:w-[34vw]">
             <div data-clip className={`relative aspect-[4/3] overflow-hidden rounded-[20px] ${c.tone === "dark" ? "bg-graphite" : "bg-[#e2dfd8]"}`}>
-              <Image src={`/img/${c.img}.webp`} alt="" fill sizes="(min-width:1024px) 34vw, (min-width:640px) 56vw, 82vw" className="object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.06]" draggable={false} />
+              <div className="lib-zoom absolute inset-0 transition-transform duration-[1.2s] ease-[cubic-bezier(.16,1,.3,1)]">
+                <Image src={`/img/${c.img}.webp`} alt="" fill sizes="(min-width:1024px) 34vw, (min-width:640px) 56vw, 82vw" className="object-cover" draggable={false} />
+              </div>
               <span className={`mono absolute left-4 top-4 rounded-full px-3 py-1.5 backdrop-blur ${c.tone === "dark" ? "bg-white/10 text-paper" : "bg-ink/5 text-ink"}`}>{c.tag}</span>
               <span className="mono absolute right-4 top-4 text-[11px] opacity-50" style={{ color: c.tone === "dark" ? "var(--color-paper)" : "var(--color-ink)" }}>0{i + 1}</span>
             </div>
@@ -48,7 +67,7 @@ export default function Library() {
                 <h3 className="display text-[clamp(30px,2.6vw,42px)]" style={{ fontStretch: "78%" }}>{c.h}</h3>
                 <p className="mt-2 max-w-[36ch] text-[15px] leading-relaxed text-ink/60">{c.p}</p>
               </div>
-              <span className="mt-1 grid h-10 w-10 shrink-0 place-items-center rounded-full bg-ink text-paper transition-transform duration-500 group-hover:rotate-45">↗</span>
+              <span className="mt-1 grid h-10 w-10 shrink-0 place-items-center rounded-full bg-ink text-paper transition-transform duration-500 lib-arrow">↗</span>
             </div>
           </article>
         ))}
