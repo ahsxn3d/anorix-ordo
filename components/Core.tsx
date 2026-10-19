@@ -1,5 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
+import Lazy3D from "./kit/Lazy3D";
 import { useEffect, useRef, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -14,31 +15,31 @@ const chapters = [
 export default function Core() {
   const root = useRef<HTMLElement>(null);
   const progress = useRef(0);
-  const [mount, setMount] = useState(false);
   const [active, setActive] = useState(0);
-  const [running, setRunning] = useState(false);
 
   useEffect(() => {
     const el = root.current!;
-    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) setMount(true); setRunning(e.isIntersecting); }, { rootMargin: "60% 0px" });
-    io.observe(el);
+    // warm the 3D chunk early so the scene is ready before the section arrives
+    const warm = () => import("./CoreScene");
+    const w = window as Window & { requestIdleCallback?: (f: () => void) => number };
+    if (w.requestIdleCallback) w.requestIdleCallback(warm); else setTimeout(warm, 1500);
     const bar = el.querySelector<HTMLElement>(".core-bar");
     const st = ScrollTrigger.create({
       trigger: el, start: "top top", end: "bottom bottom", scrub: true,
       onUpdate: (s) => {
         progress.current = s.progress;
-        const a = s.progress < 0.36 ? 0 : s.progress < 0.7 ? 1 : 2;
+        const a = s.progress < 0.34 ? 0 : s.progress < 0.68 ? 1 : 2;
         setActive((p) => (p === a ? p : a));
         if (bar) bar.style.transform = `scaleX(${s.progress})`;
       },
     });
-    return () => { io.disconnect(); st.kill(); };
+    return () => { st.kill(); };
   }, []);
 
   return (
-    <section id="core" ref={root} className="relative z-0 h-[420vh] bg-ink">
+    <section id="core" ref={root} className="relative z-0 h-[300vh] bg-ink">
       <div className="sticky top-0 h-[100svh] overflow-hidden">
-        <div className="absolute inset-0">{mount && <CoreScene progress={progress} running={running} />}</div>
+        <Lazy3D poster="/img/core-poster.webp" render={({ onReady, running }) => <CoreScene progress={progress} running={running} onReady={onReady} />} />
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,var(--color-ink)_92%)]" />
         <div className="wrap pointer-events-none relative flex h-full flex-col justify-between pb-8 pt-24 md:pb-12 md:pt-28">
           <div className="flex items-start justify-between">

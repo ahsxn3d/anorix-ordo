@@ -2,6 +2,7 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useMemo, useRef, type MutableRefObject } from "react";
 import * as THREE from "three";
+import FirstFrame from "./kit/FirstFrame";
 
 const vert = /* glsl */ `
   attribute vec3 aA; attribute vec3 aB; attribute vec3 aC; attribute float aR;
@@ -120,16 +121,17 @@ function Group({ progress, count }: { progress: MutableRefObject<number>; count:
   return (<><Swarm progress={progress} count={count} /></>);
 }
 
-export default function CoreScene({ progress, running }: { progress: MutableRefObject<number>; running: boolean }) {
+export default function CoreScene({ progress, running, onReady }: { progress: MutableRefObject<number>; running: boolean; onReady: () => void }) {
   const mobile = typeof window !== "undefined" && window.innerWidth < 768;
   return (
     <Canvas
-      frameloop={running ? "always" : "never"}
+      frameloop={running ? "always" : "demand"}
       dpr={[1, mobile ? 1.25 : 1.5]}
       gl={{ antialias: !mobile, powerPreference: "high-performance", alpha: false }}
       camera={{ position: [0, 0, mobile ? 10.5 : 8], fov: 38 }}
       onCreated={({ gl }) => gl.setClearColor("#0c0d0f")}
     >
+      <FirstFrame onReady={onReady} />
       <Group progress={progress} count={mobile ? 1100 : 2400} />
       <group position={[mobile ? 0 : 1.1, mobile ? 0.9 : 0.1, 0]}><Core progress={progress} /></group>
     </Canvas>
