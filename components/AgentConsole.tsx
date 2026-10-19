@@ -61,12 +61,12 @@ export default function AgentConsole() {
           {R.steps.map(([name, detail], i) => {
             const state = step > i ? "done" : step === i ? "active" : "idle";
             return (
-              <li key={name + R.id} className={`flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all duration-500 ${state === "active" ? "bg-white/[0.06]" : ""}`}>
+              <li key={name + R.id} className={`flex h-[50px] items-center gap-3 rounded-xl px-3 transition-[background-color] duration-500 ${state === "active" ? "bg-white/[0.06]" : ""}`}>
                 <span className={`grid h-5 w-5 shrink-0 place-items-center rounded-full border transition-all duration-500 ${state === "done" ? "border-mint bg-mint text-ink" : state === "active" ? "border-mint" : "border-white/15"}`}>
                   {state === "done" ? <svg viewBox="0 0 12 12" className="h-2.5 w-2.5"><path d="m2.5 6.2 2.2 2.2 4.8-4.8" fill="none" stroke="currentColor" strokeWidth="1.8" /></svg> : state === "active" ? <span className="h-1.5 w-1.5 rounded-full bg-mint pulse-dot" /> : null}
                 </span>
                 <span className={`mono w-[64px] shrink-0 ${state === "idle" ? "text-paper/50" : "text-paper/80"}`}>{name}</span>
-                <span className={`truncate text-[13px] transition-all duration-500 ${state === "idle" ? "translate-x-1 text-paper/0" : "text-paper/60"}`}>{detail}</span>
+                <span className={`line-clamp-2 min-w-0 flex-1 text-[12.5px] leading-[1.35] transition-[transform,color] duration-500 ${state === "idle" ? "translate-x-1 text-paper/0" : "text-paper/60"}`}>{detail}</span>
               </li>
             );
           })}

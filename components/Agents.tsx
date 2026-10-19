@@ -38,8 +38,8 @@ export default function Agents() {
           <p className="mono col-span-4 text-stone md:col-span-3">03 — The agents</p>
           <h2 className="display col-span-4 text-[clamp(48px,6.6vw,108px)] md:col-span-9" data-reveal="lines">Five specialists.<br />One shared brain.</h2>
         </div>
-        <div className="mt-[clamp(56px,7vw,110px)] grid grid-cols-4 gap-8 md:grid-cols-12 md:gap-6" onPointerEnter={(e) => e.pointerType === "mouse" && setPaused(true)} onPointerLeave={() => setPaused(false)} onPointerCancel={() => setPaused(false)}>
-          <div role="tablist" aria-label="Agents" className="col-span-4 md:col-span-6">
+        <div className="mt-[clamp(56px,7vw,110px)] grid grid-cols-4 gap-10 lg:grid-cols-12 lg:gap-6" onPointerEnter={(e) => e.pointerType === "mouse" && setPaused(true)} onPointerLeave={() => setPaused(false)} onPointerCancel={() => setPaused(false)}>
+          <div role="tablist" aria-label="Agents" className="col-span-4 lg:col-span-6">
             {agents.map((a, k) => (
               <button key={a.k} role="tab" aria-selected={k === i} onClick={() => setI(k)}
                 className="group relative flex w-full items-center justify-between border-t border-ink/12 py-3 text-left md:py-4">
@@ -49,9 +49,9 @@ export default function Agents() {
               </button>
             ))}
           </div>
-          <div className="col-span-4 md:col-span-6 md:pl-6">
-            <div className="md:sticky md:top-28">
-              <p key={A.k + "d"} className="max-w-[46ch] text-[17px] leading-relaxed text-ink/70" style={{ animation: "rise .8s cubic-bezier(.16,1,.3,1) both" }}>{A.d}</p>
+          <div className="col-span-4 lg:col-span-6 lg:pl-6">
+            <div className="lg:sticky lg:top-28">
+              <p key={A.k + "d"} className="min-h-[calc(17px*1.625*3)] max-w-[46ch] text-[17px] leading-relaxed text-ink/70" style={{ animation: "rise .8s cubic-bezier(.16,1,.3,1) both" }}>{A.d}</p>
               <div className="mt-8 overflow-hidden rounded-[22px] bg-ink text-paper shadow-[0_40px_80px_-40px_rgba(12,13,15,.5)]">
                 <div className="flex items-center justify-between border-b border-white/10 px-5 py-3.5">
                   <span className="mono text-paper/60">{A.k.toLowerCase()}-agent · today</span>
@@ -59,11 +59,11 @@ export default function Agents() {
                 </div>
                 <ul>
                   {A.rows.map((r, k) => (
-                    <li key={A.k + r[0]} className="grid grid-cols-[1fr_auto] items-center gap-x-4 border-b border-white/[0.07] px-5 py-4 last:border-0 md:grid-cols-[1.1fr_1fr_1fr_auto]"
+                    <li key={A.k + r[0]} className="grid h-[58px] grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 border-b border-white/[0.07] px-5 last:border-0 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)_minmax(0,1fr)_auto] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] xl:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)_minmax(0,1fr)_auto]"
                       style={{ animation: `rise .7s cubic-bezier(.16,1,.3,1) ${k * 0.07}s both` }}>
-                      <span className="text-[14px] text-paper/90">{r[0]}</span>
-                      <span className="hidden text-[13px] text-paper/50 md:block">{r[1]}</span>
-                      <span className="hidden font-mono text-[12px] text-paper/70 md:block">{r[2]}</span>
+                      <span className="truncate text-[14px] text-paper/90">{r[0]}</span>
+                      <span className="hidden truncate text-[13px] text-paper/50 md:block lg:hidden xl:block">{r[1]}</span>
+                      <span className="hidden truncate font-mono text-[12px] text-paper/70 md:block">{r[2]}</span>
                       <span className={`mono rounded-full px-2.5 py-1 ${r[3] === "ok" ? "bg-mint/10 text-mint" : "bg-[#ffb86b]/10 text-[#ffb86b]"}`}>{r[3] === "ok" ? "Done" : "Review"}</span>
                     </li>
                   ))}

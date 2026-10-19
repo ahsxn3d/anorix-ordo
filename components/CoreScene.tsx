@@ -126,8 +126,8 @@ export default function CoreScene({ progress, running, onReady }: { progress: Mu
   return (
     <Canvas
       frameloop={running ? "always" : "demand"}
-      dpr={[1, mobile ? 1.25 : 1.5]}
-      gl={{ antialias: !mobile, powerPreference: "high-performance", alpha: false }}
+      dpr={[1, 1.25]}
+      gl={{ antialias: !mobile && window.devicePixelRatio < 1.5, powerPreference: "high-performance", alpha: false }}
       camera={{ position: [0, 0, mobile ? 10.5 : 8], fov: 38 }}
       onCreated={({ gl }) => gl.setClearColor("#0c0d0f")}
     >
