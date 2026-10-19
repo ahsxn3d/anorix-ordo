@@ -27,11 +27,15 @@ export default function Lazy3D({ poster, alt = "", render, className = "", prior
   useEffect(() => {
     if (!webglOK()) { setDead(true); return; }
     const el = ref.current!;
-    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) setMount(true); setRunning(e.isIntersecting); }, { rootMargin: "150% 0px" });
+    // Progressive enhancement: the (identical) poster is the first paint; WebGL boots on the visitor's
+    // first interaction, so it never competes with first load / LCP.
+    let near = false, woke = false;
+    const evs = ["pointermove", "pointerdown", "wheel", "touchstart", "keydown", "scroll"] as const;
+    const wake = () => { woke = true; evs.forEach((e) => window.removeEventListener(e, wake)); if (near) setMount(true); };
+    evs.forEach((e) => window.addEventListener(e, wake, { passive: true }));
+    const io = new IntersectionObserver(([e]) => { near = e.isIntersecting; if (near && woke) setMount(true); setRunning(e.isIntersecting); }, { rootMargin: eager ? "200% 0px" : "150% 0px" });
     io.observe(el);
-    let t = 0;
-    if (eager) t = window.setTimeout(() => setMount(true), 1200);
-    return () => { io.disconnect(); clearTimeout(t); };
+    return () => { io.disconnect(); evs.forEach((e) => window.removeEventListener(e, wake)); };
   }, [eager]);
   useEffect(() => {
     if (!mount) return;
