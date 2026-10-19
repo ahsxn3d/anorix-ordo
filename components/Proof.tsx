@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 const stats = [
   { v: 5, s: "", l: "layers: plan, build, critique, test, ship" },
   { v: 4, s: "", l: "breakpoints checked on every QA pass" },
-  { v: 1, s: "key", l: "to stop every running agent at once" },
+  { v: 1, s: " key", l: "to stop every running agent at once" },
   { v: 0, s: "", l: "outward actions without your approval", text: "Zero" },
 ];
 const stack = ["Next.js", "React", "Tailwind", "Vite", "Astro", "Figma", "GitHub", "Vercel", "Playwright", "VS Code", "Terminal", "Git"];
@@ -30,7 +30,7 @@ export default function Proof() {
           {stats.map((s, i) => (
             <div key={s.l} className={`border-b border-white/10 py-8 sm:px-6 lg:border-b-0 ${i > 0 ? "lg:border-l" : "lg:pl-0"} ${i % 2 ? "sm:border-l" : "sm:pl-0"}`} data-fade data-delay={i * 0.08}>
               <p className="display text-[clamp(72px,8vw,136px)]" style={{ fontStretch: "70%" }}>
-                {s.pre}{s.text ? s.text : <span data-count={s.v}>0</span>}<span className="text-mint">{s.s}</span>
+                {s.text ? s.text : <span data-count={s.v}>0</span>}<span className="text-mint">{s.s}</span>
               </p>
               <p className="mt-3 max-w-[26ch] text-[15px] leading-relaxed text-paper/55">{s.l}</p>
             </div>

@@ -1,20 +1,18 @@
-# Credits & licenses — Ordo (concept by Anorix)
+# Credits & licenses — Helm (by Anorix)
+Concept site for Helm, a layered agent OS for web designers and vibe-coders. Layout inspired by the interaction quality of
+dayos.com (Awwwards SOTD, May 29 2025). No code, copy, logos, fonts or images were taken from the reference.
+All figures on the page describe product design (layers, approvals, kill switch); example missions and logs are illustrative. No metrics, users or testimonials are claimed.
 
-Ordo is an original concept site. Inspired by the interaction quality of dayos.com (Awwwards SOTD, May 29 2025).
-No code, copy, logos, fonts or images were taken from the reference.
+## Imagery
+Use-case and principle images are offline three.js renders (frosted-glass layer stack, chrome ring, ceramic grid, helm wheel) with
+physical transmission/metal materials, soft shadows and accumulated depth of field. The mission-loop core is real-time three.js.
 
-## Fonts (SIL Open Font License 1.1, self-hosted via Fontsource)
-- Archivo (variable, wdth + wght) — Omnibus-Type — https://fonts.google.com/specimen/Archivo
-- Inter (variable) — Rasmus Andersson — https://rsms.me/inter
-- JetBrains Mono (variable) — JetBrains — https://www.jetbrains.com/lp/mono/
+| Asset | Source | Licence |
+|---|---|---|
+| studio_small_09 HDRI (lighting / reflections) | Poly Haven — polyhaven.com/a/studio_small_09 | CC0 |
 
-## Images
-- /public/img/*.webp — rendered in-house with three.js (scripts not shipped). Self-generated, no third-party assets.
-- The 3D "Core" scene is generated in real time from code (instanced shader); no models or textures.
-- Logo mark + favicon — original SVG drawn for Ordo.
+## Fonts
+Self-hosted, SIL Open Font License 1.1 (see app/layout.tsx).
 
-## Libraries (MIT unless noted)
-Next.js, React, Tailwind CSS, three.js, @react-three/fiber, Lenis, GSAP 3 (incl. ScrollTrigger + SplitText; free under the GSAP "Standard No Charge" license).
-
-## Content
-All company names, people, metrics and quotes are fictional. Integration names (Salesforce, Stripe, etc.) appear as plain text only, to describe compatibility; no logos are used and no partnership is implied.
+## Libraries
+Next.js, React, Tailwind CSS, three.js, @react-three/fiber, Lenis, GSAP.

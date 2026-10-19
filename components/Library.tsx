@@ -3,10 +3,10 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 const cases = [
-  { img: "pipeline", tone: "light", tag: "Build", h: "Figma to live page", p: "A frame and your tokens in, a typed, responsive page out, previewed locally." },
-  { img: "billing", tone: "dark", tag: "Fix", h: "The fix-it run", p: "Describe the bug in a sentence. Helm finds the cause, patches it and proves it at every width." },
-  { img: "forecast", tone: "light", tag: "Audit", h: "The site audit", p: "Overlaps, contrast, broken hovers and slow frames, ranked and fixed one diff at a time." },
-  { img: "renewals", tone: "dark", tag: "Missions", h: "Overnight missions", p: "Queue a mission with a scope and a budget before bed. Wake up to receipts and a held push." },
+  { img: "build", tone: "light", tag: "Build", h: "Figma to live page", p: "A frame and your tokens in, a typed, responsive page out, previewed locally." },
+  { img: "fix", tone: "dark", tag: "Fix", h: "The fix-it run", p: "Describe the bug in a sentence. Helm finds the cause, patches it and proves it at every width." },
+  { img: "audit", tone: "light", tag: "Audit", h: "The site audit", p: "Overlaps, contrast, broken hovers and slow frames, ranked and fixed one diff at a time." },
+  { img: "missions", tone: "dark", tag: "Missions", h: "Overnight missions", p: "Queue a mission with a scope and a budget before bed. Wake up to receipts and a held push." },
 ];
 
 export default function Library() {
