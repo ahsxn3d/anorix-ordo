@@ -10,7 +10,7 @@ export default function Logo({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2 ${className}`}>
       <Mark className="h-6 w-6" />
-      <span className="display text-[22px] leading-none tracking-[-0.02em]" style={{ fontStretch: "88%" }}>Ordo</span>
+      <span className="display text-[22px] leading-none tracking-[-0.02em]" style={{ fontStretch: "88%" }}>Helm</span>
     </span>
   );
 }

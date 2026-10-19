@@ -25,19 +25,19 @@ export default function Hero() {
         <div className="wrap relative grid grid-cols-4 gap-x-4 md:grid-cols-12 md:gap-x-6">
           <div className="col-span-4 md:col-span-7">
             <p className="mono mb-6 flex items-center gap-2 text-paper/55" data-fade data-immediate>
-              <span className="h-1.5 w-1.5 rounded-full bg-mint" /> Agentic revenue operations
+              <span className="h-1.5 w-1.5 rounded-full bg-mint" /> Agent OS for web builders
             </p>
             <h1 className="display text-[clamp(56px,10.4vw,168px)] text-paper">
-              {["Revenue", "that runs", "itself."].map((l, i) => (
+              {["One brief.", "A whole", "crew."].map((l, i) => (
                 <span key={l} className="line-mask"><span className={`hero-line block ${i === 2 ? "text-mint" : ""}`} style={{ animationDelay: `${0.12 + i * 0.09}s` }}>{l}</span></span>
               ))}
             </h1>
             <p className="hero-soft mt-8 max-w-[440px] text-[17px] leading-relaxed text-paper/70">
-              Ordo puts AI agents on the boring half of your revenue team. They reconcile, chase, forecast and renew inside the tools you already run, and show their work.
+              Helm is a layered agent OS for web designers and vibe-coders. Give it a mission and it plans, builds, checks and ships in a loop, stops for your approval where it matters, and keeps a kill switch one key away.
             </p>
             <div className="mt-9 flex flex-wrap gap-3" data-fade data-immediate data-delay="0.75">
-              <a href="#demo" className="btn-mint">Book a demo <Arrow /></a>
-              <a href="#core" className="btn-ghost text-paper">See how it thinks</a>
+              <a href="#demo" className="btn-mint">Join the early list <Arrow /></a>
+              <a href="#core" className="btn-ghost text-paper">See the mission loop</a>
             </div>
           </div>
           <div className="col-span-4 mt-14 [perspective:1200px] md:col-span-5 md:mt-6">
@@ -46,7 +46,7 @@ export default function Hero() {
         </div>
         <div className="wrap mt-[clamp(56px,5vw,84px)]">
           <div className="grid grid-cols-2 gap-y-6 border-t border-white/10 pt-6 md:grid-cols-4" data-fade data-immediate data-delay="1">
-            {[["11,400+", "agent runs a day"], ["0.02%", "post-close variance"], ["6 wks", "to full takeover"], ["SOC 2", "Type II, by design"]].map(([a, b]) => (
+            {[["5 layers", "from brief to ship"], ["Approvals", "on pushes, deploys, spend"], ["Kill switch", "one key halts every agent"], ["Receipts", "every step logged"]].map(([a, b]) => (
               <div key={b}>
                 <p className="display text-[clamp(30px,3.2vw,46px)] text-paper" style={{ fontStretch: "80%" }}>{a}</p>
                 <p className="mono mt-1 text-paper/60">{b}</p>

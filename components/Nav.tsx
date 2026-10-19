@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Logo from "./Logo";
 
-const links = [["Platform", "#core"], ["Agents", "#agents"], ["Rollout", "#rollout"], ["Library", "#library"]];
+const links = [["Mission loop", "#core"], ["Layers", "#agents"], ["Autonomy", "#rollout"], ["Use cases", "#library"]];
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -20,7 +20,7 @@ export default function Nav() {
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] ${hidden ? "-translate-y-[120%]" : ""}`}>
       <div className="wrap flex items-center justify-between pt-4 md:pt-5">
-        <a href="#top" aria-label="Ordo home" className="rounded-full bg-ink/70 px-3 py-2 text-paper backdrop-blur-md">
+        <a href="#top" aria-label="Helm home" className="rounded-full bg-ink/70 px-3 py-2 text-paper backdrop-blur-md">
           <Logo />
         </a>
         <nav aria-label="Primary" className="hidden items-center gap-1 rounded-full border border-white/10 bg-graphite/70 p-1 backdrop-blur-md md:flex">
@@ -29,7 +29,7 @@ export default function Nav() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <a href="#demo" className="btn-mint hidden !py-2.5 md:inline-flex">Book a demo <Arrow /></a>
+          <a href="#demo" className="btn-mint hidden !py-2.5 md:inline-flex">Early access <Arrow /></a>
           <button aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen(!open)} className="grid h-11 w-11 place-items-center rounded-full bg-paper text-ink md:hidden">
             <span className="relative block h-3 w-4">
               <span className={`absolute left-0 h-[1.5px] w-4 bg-ink transition-all duration-500 ${open ? "top-1.5 rotate-45" : "top-0"}`} />
@@ -44,7 +44,7 @@ export default function Nav() {
             {links.map(([l, h]) => (
               <a key={l} href={h} onClick={() => setOpen(false)} className="display border-b border-ink/10 py-3 text-[44px]">{l}</a>
             ))}
-            <a href="#demo" onClick={() => setOpen(false)} className="btn-mint mt-6 justify-center !bg-ink !text-paper">Book a demo <Arrow /></a>
+            <a href="#demo" onClick={() => setOpen(false)} className="btn-mint mt-6 justify-center !bg-ink !text-paper">Early access <Arrow /></a>
           </div>
         </div>
       </div>

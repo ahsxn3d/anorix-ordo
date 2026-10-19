@@ -3,9 +3,9 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 const phases = [
-  { n: "01", k: "Shadow", w: "Weeks 1–2", h: "Watch first.", p: "Agents run silently beside your team, replaying real work and scoring themselves against every human decision.", stat: ["98.7%", "agreement before go-live"] },
-  { n: "02", k: "Take over", w: "Weeks 3–6", h: "Then do.", p: "Workflows flip to autonomous one by one, with approvals where you want them and receipts on everything.", stat: ["71%", "of RevOps hours returned"] },
-  { n: "03", k: "Compound", w: "Ongoing", h: "Get sharper.", p: "Every correction becomes training. The longer Ordo runs, the fewer exceptions it hands back.", stat: ["−8%", "exceptions, month over month"] },
+  { n: "01", k: "Watch", w: "Day one", h: "Suggest first.", p: "Helm proposes every step and you approve each one. You see how it plans before it touches a file.", stat: ["Every step", "waits for your OK"] },
+  { n: "02", k: "Approve", w: "When you are ready", h: "Then batch.", p: "Low-risk steps, like local edits and test runs, go on their own. Anything that leaves your machine still waits.", stat: ["Outward", "steps always gated"] },
+  { n: "03", k: "Delegate", w: "Your call", h: "Then let it run.", p: "Hand over whole missions with a scope and a budget. The kill switch stays one key away the entire time.", stat: ["1 key", "stops everything"] },
 ];
 
 function Diagram({ i }: { i: number }) {
@@ -60,9 +60,9 @@ export default function Rollout() {
       <div className="lg:flex lg:h-[100svh] lg:items-center">
         <div ref={track} className="flex flex-col gap-6 px-[clamp(16px,3.4vw,48px)] py-[clamp(88px,11vw,140px)] [perspective:1400px] lg:w-max lg:flex-row lg:items-stretch lg:gap-6 lg:py-0">
           <div className="flex flex-col justify-between lg:w-[38vw] lg:pr-10">
-            <p className="mono text-paper/60">04 — The rollout</p>
-            <h2 className="display mt-6 text-[clamp(52px,7.4vw,124px)]" data-reveal="lines">Shadow.<br />Take over.<br /><span className="text-mint">Compound.</span></h2>
-            <p className="mt-8 max-w-[38ch] text-[16px] leading-relaxed text-paper/60" data-fade>No big-bang migration. Ordo earns autonomy one workflow at a time, on your data, with your rules.</p>
+            <p className="mono text-paper/60">04 — Autonomy</p>
+            <h2 className="display mt-6 text-[clamp(52px,7.4vw,124px)]" data-reveal="lines">Watch.<br />Approve.<br /><span className="text-mint">Delegate.</span></h2>
+            <p className="mt-8 max-w-[38ch] text-[16px] leading-relaxed text-paper/60" data-fade>No leap of faith. Helm earns autonomy one step at a time, on your projects, with your rules.</p>
           </div>
           {phases.map((ph, i) => (
             <article key={ph.n} className="phase flex min-h-[520px] flex-col justify-between rounded-[28px] border border-white/10 bg-graphite p-7 will-change-transform md:p-9 lg:h-[72vh] lg:w-[36vw]">

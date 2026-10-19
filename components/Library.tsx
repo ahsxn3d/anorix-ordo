@@ -3,10 +3,10 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 const cases = [
-  { img: "pipeline", tone: "light", tag: "Pipeline", h: "Self-healing CRM", p: "Stages, amounts and dates that fix themselves overnight." },
-  { img: "billing", tone: "dark", tag: "Billing", h: "Contract-to-cash", p: "Signed PDF in, correct invoice out, ledger balanced." },
-  { img: "forecast", tone: "light", tag: "Forecast", h: "The 6 a.m. number", p: "A bottom-up forecast rebuilt from signals every morning." },
-  { img: "renewals", tone: "dark", tag: "Renewals", h: "Churn, caught early", p: "Fading usage flagged 90 days out with the save play drafted." },
+  { img: "pipeline", tone: "light", tag: "Build", h: "Figma to live page", p: "A frame and your tokens in, a typed, responsive page out, previewed locally." },
+  { img: "billing", tone: "dark", tag: "Fix", h: "The fix-it run", p: "Describe the bug in a sentence. Helm finds the cause, patches it and proves it at every width." },
+  { img: "forecast", tone: "light", tag: "Audit", h: "The site audit", p: "Overlaps, contrast, broken hovers and slow frames, ranked and fixed one diff at a time." },
+  { img: "renewals", tone: "dark", tag: "Missions", h: "Overnight missions", p: "Queue a mission with a scope and a budget before bed. Wake up to receipts and a held push." },
 ];
 
 export default function Library() {
@@ -29,8 +29,8 @@ export default function Library() {
       <div className="wrap pt-[clamp(88px,11vw,170px)]">
         <div className="grid grid-cols-4 items-end gap-4 md:grid-cols-12 md:gap-6">
           <div className="col-span-4 md:col-span-8">
-            <p className="mono mb-8 text-stone">05 — Use-case library</p>
-            <h2 className="display text-[clamp(48px,6.6vw,108px)]" data-reveal="lines">Start with<br />one workflow.</h2>
+            <p className="mono mb-8 text-stone">05 — Use cases</p>
+            <h2 className="display text-[clamp(48px,6.6vw,108px)]" data-reveal="lines">Start with<br />one mission.</h2>
           </div>
           <div className="col-span-4 flex gap-2 md:col-span-4 md:justify-end">
             <button aria-label="Previous" onClick={() => by(-1)} className="grid h-12 w-12 place-items-center rounded-full border border-ink/15 transition-colors hover:bg-ink hover:text-paper">←</button>

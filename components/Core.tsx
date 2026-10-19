@@ -7,9 +7,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const CoreScene = dynamic(() => import("./CoreScene"), { ssr: false });
 
 const chapters = [
-  ["01", "Ingest", "Every signal, untangled.", "Ordo connects to CRM, billing, ERP and the warehouse, and turns thousands of loose events into one live model of your revenue."],
-  ["02", "Reason", "One model of the business.", "Agents share a single, auditable graph of accounts, contracts and cash, so every decision traces back to a source row."],
-  ["03", "Execute", "Agents that close the loop.", "Specialist agents work in orbit around that core: posting, chasing, forecasting and renewing, around the clock."],
+  ["01", "Plan", "Intent in, mission out.", "Helm turns a brief, a screenshot or a Figma link into a mission: goals, constraints, files in scope and a clear definition of done."],
+  ["02", "Build", "Layers that check each other.", "A builder writes the code, a critic reviews every diff, and QA drives a real browser at four widths. Nothing passes on one opinion."],
+  ["03", "Ship", "You hold the helm.", "Pushes, deploys, spend and anything outside the sandbox wait for your approval. One key stops every agent, instantly."],
 ];
 
 export default function Core() {
@@ -43,7 +43,7 @@ export default function Core() {
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,var(--color-ink)_92%)]" />
         <div className="wrap pointer-events-none relative flex h-full flex-col justify-between pb-8 pt-24 md:pb-12 md:pt-28">
           <div className="flex items-start justify-between">
-            <p className="mono text-paper/55">02 — The core</p>
+            <p className="mono text-paper/55">02 — The mission loop</p>
             <p className="mono hidden text-paper/60 md:block">Scroll to assemble</p>
           </div>
           <div className="grid grid-cols-4 items-end gap-4 md:grid-cols-12 md:gap-6">

@@ -3,26 +3,26 @@ import { useEffect, useRef, useState } from "react";
 
 const runs = [
   {
-    id: "4821", task: "Reconcile Q3 invoices against payouts and flag every mismatch over $500.",
+    id: "014", task: "Build a landing page from this Figma frame, match our tokens, and open a local preview.",
     steps: [
-      ["Request", "Parsed intent · scope: 1,284 invoices"],
-      ["Read", "Pulled ledger + 3 payout reports"],
-      ["Reason", "Matched 1,271 · 13 need a look"],
-      ["Act", "Posted 1,271 entries · opened 13 tasks"],
-      ["Verify", "Balanced to the cent · audit trail saved"],
+      ["Plan", "Brief parsed · 1 page, 6 sections, 2 new components"],
+      ["Read", "Figma frame, tokens.css, repo structure"],
+      ["Build", "6 components written · build passes"],
+      ["Check", "Critic + browser QA at 1440 / 1024 / 768 / 390"],
+      ["Ask", "Preview ready · push held for your approval"],
     ],
-    result: ["$2.48M", "reconciled in 4m 12s"],
+    result: ["Ready", "waiting on your approval"],
   },
   {
-    id: "4822", task: "Find every renewal under 60 days with falling usage and draft the save play.",
+    id: "015", task: "Fix the mobile nav overlapping the pricing cards and get it ready for staging.",
     steps: [
-      ["Request", "Scope: 312 accounts renewing < 60d"],
-      ["Read", "Usage, tickets, seats, invoices"],
-      ["Reason", "41 at risk · ranked by ARR"],
-      ["Act", "Drafted 41 plays · routed to owners"],
-      ["Verify", "Owners notified · CRM updated"],
+      ["Plan", "Scope: /pricing at 390–768 px only"],
+      ["Read", "DOM snapshot, CSS, last 3 commits"],
+      ["Build", "Root cause: header z-index · 2-line patch"],
+      ["Check", "No overlap at 4 widths · 0 console errors"],
+      ["Ask", "Commit prepared · staging push needs you"],
     ],
-    result: ["$914K", "ARR protected this week"],
+    result: ["2 lines", "changed, nothing else touched"],
   },
 ];
 
@@ -50,7 +50,7 @@ export default function AgentConsole() {
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-3.5">
         <div className="flex items-center gap-2.5">
           <span className="h-2 w-2 rounded-full bg-mint pulse-dot" />
-          <span className="mono text-paper/70">ordo / agent-run #{R.id}</span>
+          <span className="mono text-paper/70">helm / mission #{R.id}</span>
         </div>
         <span className="mono text-paper/60">live</span>
       </div>
@@ -79,7 +79,7 @@ export default function AgentConsole() {
             <p className="display text-[40px] text-mint" style={{ fontStretch: "80%" }}>{R.result[0]}</p>
             <p className="text-[13px] text-paper/55">{R.result[1]}</p>
           </div>
-          <span className="mono rounded-full border border-mint/40 px-3 py-1.5 text-mint">Verified</span>
+          <span className="mono rounded-full border border-mint/40 px-3 py-1.5 text-mint">Checked</span>
         </div>
       </div>
     </div>

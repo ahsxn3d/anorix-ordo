@@ -3,12 +3,12 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 const stats = [
-  { v: 71, s: "%", l: "of RevOps hours handed back to the team" },
-  { v: 4.2, s: "×", l: "faster month-end close, from 9 days to 2" },
-  { v: 38, s: "M", pre: "$", l: "in leaked revenue recovered across customers" },
-  { v: 0, s: "", l: "migrations. Ordo works on the stack you have", text: "Zero" },
+  { v: 5, s: "", l: "layers: plan, build, critique, test, ship" },
+  { v: 4, s: "", l: "breakpoints checked on every QA pass" },
+  { v: 1, s: "key", l: "to stop every running agent at once" },
+  { v: 0, s: "", l: "outward actions without your approval", text: "Zero" },
 ];
-const stack = ["Salesforce", "HubSpot", "Stripe", "NetSuite", "Snowflake", "Chargebee", "QuickBooks", "Slack", "Gong", "BigQuery", "Zuora", "Xero"];
+const stack = ["Next.js", "React", "Tailwind", "Vite", "Astro", "Figma", "GitHub", "Vercel", "Playwright", "VS Code", "Terminal", "Git"];
 
 export default function Proof() {
   const root = useRef<HTMLElement>(null);
@@ -25,7 +25,7 @@ export default function Proof() {
   return (
     <section ref={root} className="relative z-10 bg-ink text-paper">
       <div className="wrap py-[clamp(88px,11vw,170px)]">
-        <p className="mono mb-10 text-paper/60">06 — Proof</p>
+        <p className="mono mb-10 text-paper/60">06 — By design</p>
         <div className="grid grid-cols-1 border-t border-white/10 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((s, i) => (
             <div key={s.l} className={`border-b border-white/10 py-8 sm:px-6 lg:border-b-0 ${i > 0 ? "lg:border-l" : "lg:pl-0"} ${i % 2 ? "sm:border-l" : "sm:pl-0"}`} data-fade data-delay={i * 0.08}>
@@ -39,8 +39,8 @@ export default function Proof() {
         <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-12" data-fade>
           <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-graphite p-6 lg:col-span-8 md:p-8">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-paper/60">Recovered revenue · trailing 12 months</span>
-              <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.08em] text-mint"><span className="h-1.5 w-1.5 rounded-full bg-mint pulse-dot" />live</span>
+              <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-paper/60">Mission 014 · steps over time (illustrative)</span>
+              <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.08em] text-mint"><span className="h-1.5 w-1.5 rounded-full bg-mint pulse-dot" />example</span>
             </div>
             <svg viewBox="0 0 800 260" className="mt-6 h-auto w-full" aria-hidden="true">
               <defs><linearGradient id="pf" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#7cffc4" stopOpacity=".35" /><stop offset="1" stopColor="#7cffc4" stopOpacity="0" /></linearGradient></defs>
@@ -50,10 +50,10 @@ export default function Proof() {
               <path d="M0 240 C 100 236 200 230 300 224 S 500 214 800 200" fill="none" stroke="#eceae4" strokeOpacity=".35" strokeDasharray="4 6" />
               <circle cx="800" cy="30" r="6" fill="#7cffc4" />
             </svg>
-            <div className="mt-4 flex justify-between font-mono text-[11px] text-paper/50">{["Nov", "Jan", "Mar", "May", "Jul", "Sep"].map((m) => <span key={m}>{m}</span>)}</div>
+            <div className="mt-4 flex justify-between font-mono text-[11px] text-paper/50">{["Plan", "Read", "Build", "Critic", "QA", "Ask"].map((m) => <span key={m}>{m}</span>)}</div>
           </div>
           <div className="grid grid-cols-2 gap-4 lg:col-span-4 lg:grid-cols-1">
-            {[["Exceptions", "−63%", 38], ["Hours back / wk", "212", 82], ["Days to close", "2.1", 24]].map(([l, v, w]) => (
+            {[["Approvals asked", "3", 38], ["Critic send-backs", "2", 24], ["Widths tested", "4", 82]].map(([l, v, w]) => (
               <div key={l as string} className="rounded-[24px] border border-white/10 bg-graphite p-5 last:col-span-2 lg:last:col-span-1">
                 <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-paper/60">{l}</p>
                 <p className="display mt-3 text-[44px]" style={{ fontStretch: "78%" }}>{v}</p>
@@ -63,7 +63,7 @@ export default function Proof() {
           </div>
         </div>
         <div className="mt-[clamp(80px,9vw,140px)] grid grid-cols-4 gap-4 md:grid-cols-12 md:gap-6">
-          <h2 className="display col-span-4 text-[clamp(40px,4.6vw,76px)] md:col-span-5" data-reveal="lines">Reads from<br />your stack.<br />Writes back.</h2>
+          <h2 className="display col-span-4 text-[clamp(40px,4.6vw,76px)] md:col-span-5" data-reveal="lines">Built for<br />the stack<br />you ship.</h2>
           <ul className="col-span-4 grid grid-cols-2 gap-px overflow-hidden rounded-[22px] border border-white/10 bg-white/10 sm:grid-cols-3 md:col-span-7 md:grid-cols-4">
             {stack.map((n) => (
               <li key={n} className="flex h-[86px] items-center justify-center bg-ink text-[15px] font-medium tracking-tight text-paper/55 transition-colors duration-300 hover:bg-graphite hover:text-mint md:h-[104px]">{n}</li>
