@@ -64,7 +64,7 @@ export default function SmoothScroll() {
         });
         // char rise for giant words
         q<HTMLElement>('[data-reveal="chars"]').forEach((el) => {
-          const s = new SplitText(el, { type: "chars", mask: "chars" });
+          const s = new SplitText(el, { type: "words,chars", mask: "chars" });
           splits.push(s);
           gsap.set(el, { autoAlpha: 1 });
           gsap.from(s.chars, {
