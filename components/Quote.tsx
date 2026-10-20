@@ -1,4 +1,4 @@
-import Image from "next/image";
+import OrbitMini from "./OrbitMini";
 export default function Quote() {
   return (
     <section className="relative z-10 bg-ink text-paper">
@@ -7,7 +7,7 @@ export default function Quote() {
           <div className="col-span-4 md:col-span-3">
             <p className="mono text-paper/60">07 — Principle</p>
             <div data-clip className="relative mt-6 aspect-[4/5] overflow-hidden rounded-[20px] bg-graphite">
-              <Image data-clip-img src="/img/orbit.webp" alt="" fill sizes="(min-width:768px) 22vw, 90vw" className="object-cover" />
+              <OrbitMini />
             </div>
           </div>
           <figure className="col-span-4 md:col-span-9">

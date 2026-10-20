@@ -39,7 +39,7 @@ export default function Core() {
   return (
     <section id="core" ref={root} className="relative z-0 h-[300vh] bg-ink">
       <div className="sticky top-0 h-[100svh] overflow-hidden">
-        <Lazy3D poster="/img/core-poster.webp" render={({ onReady, running }) => <CoreScene progress={progress} running={running} onReady={onReady} />} />
+        <Lazy3D render={({ onReady, running }) => <CoreScene progress={progress} running={running} onReady={onReady} />} />
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,var(--color-ink)_92%)]" />
         <div className="wrap pointer-events-none relative flex h-full flex-col justify-between pb-8 pt-24 md:pb-12 md:pt-28">
           <div className="flex items-start justify-between">

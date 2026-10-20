@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import MenuBar from "@/components/MenuBar";
+import Terminal from "@/components/Terminal";
+import { CartProvider } from "@/lib/commerce/cart";
 
 const display = localFont({ src: "../public/fonts/archivo-latin-wdth-normal.woff2", variable: "--f-display", weight: "100 900", display: "swap", adjustFontFallback: "Arial", declarations: [{ prop: "font-stretch", value: "62% 125%" }] });
 const sans = localFont({ src: "../public/fonts/inter-latin-wght-normal.woff2", variable: "--f-sans", weight: "100 900", display: "swap" });
@@ -21,8 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body>
-        <SmoothScroll />
-        {children}
+        <CartProvider storeKey="helm-cart"><SmoothScroll /><MenuBar />{children}<Terminal /></CartProvider>
       </body>
     </html>
   );

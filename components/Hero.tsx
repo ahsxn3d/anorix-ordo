@@ -36,7 +36,7 @@ export default function Hero() {
               Helm is a layered agent OS for web designers and vibe-coders. Give it a mission and it plans, builds, checks and ships in a loop, stops for your approval where it matters, and keeps a kill switch one key away.
             </p>
             <div className="mt-9 flex flex-wrap gap-3" data-fade data-immediate data-delay="0.75">
-              <a href="#demo" className="btn-mint">Join the early list <Arrow /></a>
+              <a href="/pricing" className="btn-mint">Get Helm <Arrow /></a>
               <a href="#core" className="btn-ghost text-paper">See the mission loop</a>
             </div>
           </div>

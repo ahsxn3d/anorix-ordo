@@ -1,6 +1,5 @@
 "use client";
 import { Component, useEffect, useRef, useState, type ReactNode } from "react";
-import Image from "next/image";
 
 class Boundary extends Component<{ children: ReactNode; onError: () => void }, { failed: boolean }> {
   state = { failed: false };
@@ -16,7 +15,7 @@ function webglOK() {
 /** Static poster is ALWAYS painted first; the canvas fades in over it once its first frame has rendered.
  *  If WebGL is missing / context lost / chunk fails, the poster simply stays. */
 export default function Lazy3D({ poster, alt = "", render, className = "", priority = false, eager = false }: {
-  poster: string; alt?: string; className?: string; priority?: boolean; eager?: boolean;
+  poster?: string; alt?: string; className?: string; priority?: boolean; eager?: boolean;
   render: (p: { onReady: () => void; running: boolean }) => ReactNode;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -35,10 +34,11 @@ export default function Lazy3D({ poster, alt = "", render, className = "", prior
     evs.forEach((e) => window.addEventListener(e, wake, { passive: true }));
     const io = new IntersectionObserver(([e]) => { near = e.isIntersecting; if (near && woke) setMount(true); }, { rootMargin: eager ? "200% 0px" : "150% 0px" });
     io.observe(el);
+    const idle = window.setTimeout(wake, 700); // no poster any more: boot shortly after load anyway
     // render loop only while actually on screen (mount stays warm off-screen, frames stop)
     const vis = new IntersectionObserver(([e]) => setRunning(e.isIntersecting), { rootMargin: "5% 0px" });
     vis.observe(el);
-    return () => { io.disconnect(); vis.disconnect(); evs.forEach((e) => window.removeEventListener(e, wake)); };
+    return () => { clearTimeout(idle); io.disconnect(); vis.disconnect(); evs.forEach((e) => window.removeEventListener(e, wake)); };
   }, [eager]);
   useEffect(() => {
     if (!mount) return;
@@ -50,7 +50,7 @@ export default function Lazy3D({ poster, alt = "", render, className = "", prior
   }, [mount, ready]);
   return (
     <div ref={ref} className={`absolute inset-0 ${className}`}>
-      <Image src={poster} alt={alt} fill priority={priority} sizes="100vw" className={`object-cover transition-opacity duration-700 ${ready && !dead ? "opacity-0" : "opacity-100"}`} />
+      <div className={`absolute inset-0 bg-[radial-gradient(ellipse_at_center,#17181b,#0c0d0f_70%)] transition-opacity duration-700 ${ready && !dead ? "opacity-0" : "opacity-100"}`} />
       {mount && !dead && (
         <div className={`absolute inset-0 transition-opacity duration-700 ${ready ? "opacity-100" : "opacity-0"}`}>
           <Boundary onError={() => setDead(true)}>{render({ onReady: () => setReady(true), running })}</Boundary>

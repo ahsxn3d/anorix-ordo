@@ -1,4 +1,3 @@
-import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Thesis from "@/components/Thesis";
 import Core from "@/components/Core";
@@ -12,7 +11,6 @@ import Closing from "@/components/Closing";
 export default function Page() {
   return (
     <>
-      <Nav />
       <main>
         <Hero />
         <Thesis />

@@ -16,3 +16,6 @@ Self-hosted, SIL Open Font License 1.1 (see app/layout.tsx).
 
 ## Libraries
 Next.js, React, Tailwind CSS, three.js, @react-three/fiber, Lenis, GSAP.
+
+## 2026-10 rebuild
+All raster renders removed. Visuals are the live instanced swarm (CoreScene) and procedural HTML/CSS UI mockups. No images or sequences.

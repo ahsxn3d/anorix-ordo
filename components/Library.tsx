@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import Mock from "./Mock";
 import { useEffect, useRef } from "react";
 
 const cases = [
@@ -57,7 +57,7 @@ export default function Library() {
           <article key={c.h} className="group w-[82vw] shrink-0 snap-start sm:w-[56vw] lg:w-[34vw]">
             <div data-clip className={`relative aspect-[4/3] overflow-hidden rounded-[20px] ${c.tone === "dark" ? "bg-graphite" : "bg-[#e2dfd8]"}`}>
               <div className="lib-zoom absolute inset-0 transition-transform duration-[1.2s] ease-[cubic-bezier(.16,1,.3,1)]">
-                <Image src={`/img/${c.img}.webp`} alt="" fill sizes="(min-width:1024px) 34vw, (min-width:640px) 56vw, 82vw" className="object-cover" draggable={false} />
+                <Mock kind={c.img} dark={c.tone === "dark"} />
               </div>
               <span className={`mono absolute left-4 top-4 rounded-full px-3 py-1.5 backdrop-blur ${c.tone === "dark" ? "bg-white/10 text-paper" : "bg-ink/5 text-ink"}`}>{c.tag}</span>
               <span className="mono absolute right-4 top-4 text-[11px] opacity-50" style={{ color: c.tone === "dark" ? "var(--color-paper)" : "var(--color-ink)" }}>0{i + 1}</span>
@@ -67,7 +67,7 @@ export default function Library() {
                 <h3 className="display text-[clamp(30px,2.6vw,42px)]" style={{ fontStretch: "78%" }}>{c.h}</h3>
                 <p className="mt-2 max-w-[36ch] text-[15px] leading-relaxed text-ink/60">{c.p}</p>
               </div>
-              <span className="mt-1 grid h-10 w-10 shrink-0 place-items-center rounded-full bg-ink text-paper transition-transform duration-500 lib-arrow">↗</span>
+              <a href="/features" aria-label="See the layers" className="mt-1 grid h-10 w-10 shrink-0 place-items-center rounded-full bg-ink text-paper transition-transform duration-500 lib-arrow">↗</a>
             </div>
           </article>
         ))}

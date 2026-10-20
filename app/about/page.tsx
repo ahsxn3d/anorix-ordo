@@ -1,0 +1,7 @@
+import { Head } from "@/components/UI";
+import OrbitMini from "@/components/OrbitMini";
+export const metadata = { title: "About — Helm" };
+const rules = [["Visible", "Every step is written down: what changed, why, and what it cost."], ["Approved", "Anything that leaves your machine waits for you: pushes, deploys, spend."], ["Stoppable", "One key stops every agent, running or queued, every time."], ["Small", "Diffs small enough to read. Missions small enough to finish."]];
+export default function Page() { return (<main><Head k="Helm › About" title={<>Agents do<br />the work.<br /><span className="text-mint">You steer.</span></>} lead="Helm is an agent OS for web designers and vibe-coders, built by Anorix. It exists because handing a repo to an agent should feel like working with a careful colleague, not hoping for the best." />
+  <section className="sheet relative z-10 -mt-10 bg-paper py-[clamp(80px,10vw,140px)] text-ink"><div className="wrap grid gap-10 md:grid-cols-12"><div className="relative aspect-square overflow-hidden rounded-[22px] bg-ink md:col-span-5"><OrbitMini stage={1} /></div>
+    <div className="md:col-span-6 md:col-start-7"><p className="mono mb-6 text-stone">The Helm rules</p>{rules.map(([h, p], i) => <div key={h} className="border-t border-ink/10 py-6"><p className="display text-[44px]"><span className="mono mr-4 align-middle text-[13px] text-stone">0{i + 1}</span>{h}</p><p className="mt-2 text-[16px] text-ink/65">{p}</p></div>)}</div></div></section></main>); }
